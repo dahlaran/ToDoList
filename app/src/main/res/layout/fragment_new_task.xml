@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.dahlaran.todolist.viewmodels.AddTasksViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/small_dim"
+                android:paddingTop="@dimen/small_dim"
+                android:paddingRight="@dimen/small_dim"
+                android:paddingBottom="@dimen/small_dim"
+                android:visibility="@{viewmodel.dataLoading ? View.GONE : View.VISIBLE}">
+
+                <com.dahlaran.todolist.views.custom.CustomEditText
+                    android:id="@+id/addTaskTitleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title"
+                    android:imeOptions="flagNoExtractUi"
+                    android:maxLines="1"
+                    android:text="@={viewmodel.title}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textStyle="bold"
+                    android:inputType="textCapWords" />
+
+                <com.dahlaran.todolist.views.custom.CustomEditText
+                    android:id="@+id/addTaskDescriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/basic_dim"
+                    android:gravity="top"
+                    android:hint="@string/enter_your_task"
+                    android:imeOptions="flagNoExtractUi"
+                    android:text="@={viewmodel.description}"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/saveTaskFloatingButton"
+            style="@style/CustomFloatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/basic_dim"
+            android:src="@android:drawable/ic_media_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

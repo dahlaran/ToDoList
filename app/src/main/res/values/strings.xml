@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="no_tasks_image_available">no tasks image available</string>
+    <string name="you_have_no_tasks">You have no tasks !</string>
+    <string name="title">Title</string>
+    <string name="enter_your_task">Enter your task</string>
+    <string name="no_data">No data</string>
+    <string name="edit_task">Edit task</string>
+    <string name="menu_delete_task">Delete task</string>
+    <string name="add_task">Add task</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_list_separator_title_list">Separator between title and list</string>
+</resources>

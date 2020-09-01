@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_dim">8dp</dimen>
+    <dimen name="basic_dim">12dp</dimen>
+    <dimen name="big_dim">16dp</dimen>
+
+    <dimen name="image_no_task_dimens">96dp</dimen>
+    <dimen name="layout_task_height">60dp</dimen>
+</resources>

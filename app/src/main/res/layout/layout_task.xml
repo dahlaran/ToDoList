@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.widget.CompoundButton" />
+
+        <variable
+            name="task"
+            type="com.dahlaran.todolist.data.Task" />
+
+        <variable
+            name="viewmodel"
+            type="com.dahlaran.todolist.viewmodels.TasksViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/taskMainLinear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_task_height"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/basic_dim"
+        android:paddingTop="@dimen/small_dim"
+        android:paddingEnd="@dimen/basic_dim"
+        android:paddingBottom="@dimen/small_dim">
+
+        <CheckBox
+            android:id="@+id/taskCompletedCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:checked="@{task.completed}"
+            android:onClick="@{(view) -> viewmodel.completeTask(task, ((CompoundButton)view).isChecked())}" />
+
+        <TextView
+            android:id="@+id/taskTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@{task.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:completedTask="@{task.completed}" />
+    </LinearLayout>
+</layout>

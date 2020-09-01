@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.widget.CompoundButton" />
+
+        <variable
+            name="viewmodel"
+            type="com.dahlaran.todolist.viewmodels.DescriptionTaskViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{viewmodel::refresh}"
+            app:refreshing="@{viewmodel.dataLoading}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/small_dim"
+                android:paddingTop="@dimen/small_dim"
+                android:paddingEnd="@dimen/small_dim"
+                android:paddingBottom="@dimen/small_dim">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/small_dim"
+                    android:paddingTop="@dimen/small_dim"
+                    android:paddingRight="@dimen/small_dim"
+                    android:paddingBottom="@dimen/small_dim"
+                    android:visibility="@{viewmodel.isDataAvailable ? View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_data"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:visibility="@{viewmodel.dataLoading ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/small_dim"
+                    android:paddingTop="@dimen/small_dim"
+                    android:paddingRight="@dimen/small_dim"
+                    android:paddingBottom="@dimen/small_dim"
+                    android:visibility="@{viewmodel.isDataAvailable ? View.VISIBLE : View.GONE}">
+
+                    <CheckBox
+                        android:id="@+id/taskCompletedCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/small_dim"
+                        android:checked="@{viewmodel.task.isCompleted}"
+                        android:onClick="@{(view) -> viewmodel.setCompleted(((CompoundButton)view).isChecked())}"
+                        android:paddingTop="1dp" />
+
+                    <TextView
+                        android:id="@+id/taskTitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/taskCompletedCheckbox"
+                        android:paddingTop="1dp"
+                        android:text="@{viewmodel.task.title}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        app:completedTask="@{viewmodel.task.completed}" />
+
+                    <TextView
+                        android:id="@+id/taskDescriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/taskTitleText"
+                        android:layout_marginTop="@dimen/basic_dim"
+                        android:layout_toEndOf="@id/taskCompletedCheckbox"
+                        android:paddingTop="1dp"
+                        android:text="@{viewmodel.task.content}" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editTaskFloatingButton"
+            style="@style/CustomFloatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/basic_dim"
+            android:src="@android:drawable/ic_menu_edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
