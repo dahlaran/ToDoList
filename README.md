@@ -1,2 +1,8 @@
 # ToDoList
-Simple ToDoList with livedata and graph navigation
+Simple ToDoList with:
+- LiveData
+- Room
+- Navigation graph
+- Binding
+
+MVVM for the architecture
